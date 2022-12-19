@@ -5,3 +5,14 @@
   color: blueviolet !important;
   background-color: aqua !important;
 }
+.NavBg{
+  
+  background-color: rgb(244, 221, 171);
+}
+#NavLink{
+  color: whitesmoke ;
+}
+.footer{
+  background-color: rgb(244, 221, 171);
+  height: 120px;
+}
