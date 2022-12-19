@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 const Header = () => {
 
   return (
-    
+
     <div className="">
       <Navbar className="NavBg">
         <Container>
@@ -32,9 +32,7 @@ const Header = () => {
             <Nav.Link id="NavLink" href="#pricing">
               A Propos
             </Nav.Link>
-            <Nav.Link id="NavLink" href="#pricing">
-              Sign In
-            </Nav.Link>
+           
           </Nav>
         </Container>
       </Navbar>
