@@ -1,6 +1,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Button from 'react-bootstrap/Button';
+import { BrowserRouter as Router,Link } from "react-router-dom";
 const Acceuil = () => {
   return (
     <div className="me-auto">
@@ -23,7 +24,10 @@ const Acceuil = () => {
         </div>
       </Carousel>
       <div className="pt-5 pb-5 d-flex flex-row justify-content-center">
-      <Button id="AproposBtn">A propos</Button>
+        <Link to="/Apropos">
+        <Button id="AproposBtn">A propos</Button>
+        </Link>
+      
       </div>
     
     </div>
