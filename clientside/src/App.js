@@ -5,6 +5,7 @@ import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Acceuil from "./components/Acceuil";
+import Documents from "./components/Documents";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
          <Route path="/Acceuil" element={<> <Header /><Acceuil /></>} />
+         <Route path="/Documents" element={<><Header/><Documents/></>} />
         </Routes>
         <Footer />
       </div>

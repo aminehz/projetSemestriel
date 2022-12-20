@@ -10,11 +10,11 @@ const Header = () => {
     <div className="">
       <Navbar className="NavBg">
         <Container>
-          <Navbar.Brand id="NavLink" href="#home">
+          <Navbar.Brand id="NavLink" href="/Acceuil">
             POLYTEC
           </Navbar.Brand>
           <Nav className="m-auto">
-            <Nav.Link id="NavLink" href="#home">
+            <Nav.Link id="NavLink" href="/Acceuil">
               Acceuil
             </Nav.Link>
             <Nav.Link id="NavLink" href="#features">
@@ -27,7 +27,7 @@ const Header = () => {
               <NavDropdown.Item href="#action/3.2">
                 Certification
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Document</NavDropdown.Item>
+              <NavDropdown.Item href="/Documents">Document</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link id="NavLink" href="#pricing">
               A Propos

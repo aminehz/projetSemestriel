@@ -16,6 +16,10 @@
   background-color: rgb(244, 221, 171);
   height: 120px;
 }
+#Footercontainer{
+  text-decoration: none !important;
+  color: black !important;
+}
 #AproposBtn:hover{
   background-color: whitesmoke !important;
   color:rgb(244, 221, 171) !important;
@@ -23,10 +27,25 @@
 }
 #AproposBtn{
   background-color:rgb(244, 221, 171) !important;
-  color: whitesmoke !important;
+  color: black !important;
   border-color: rgb(244, 221, 171) !important;
   height: 60px;
   width: 150px;
-
-  
+}
+#submitBtn{
+  background-color:rgb(244, 221, 171) !important;
+  color: black !important;
+  border-color: rgb(244, 221, 171) !important;
+  height: 40px;
+  width: 100px;
+}
+#submitBtn:hover{
+  background-color: whitesmoke !important;
+  color:black !important;
+  border-color: rgb(244, 221, 171) !important;
+}
+#bgimgdoc{
+  background-image: url('../public/assets/bgdoc1.jpg');
+  background-repeat: no-repeat !important;
+  background-size: cover;
 }
