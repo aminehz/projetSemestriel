@@ -16,3 +16,17 @@
   background-color: rgb(244, 221, 171);
   height: 120px;
 }
+#AproposBtn:hover{
+  background-color: whitesmoke !important;
+  color:rgb(244, 221, 171) !important;
+  border-color: rgb(244, 221, 171) !important;
+}
+#AproposBtn{
+  background-color:rgb(244, 221, 171) !important;
+  color: whitesmoke !important;
+  border-color: rgb(244, 221, 171) !important;
+  height: 60px;
+  width: 150px;
+
+  
+}
