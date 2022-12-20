@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 const Documents = () => {
   return (
     <div className="d-flex justify-content-center p-5 bg-image" id="bgimgdoc">
-      <Card className="p-1">
+      <Card className="p-1 w-50">
         <Card.Body>
           <Form>
             <Form.Group className="mb-3">
@@ -34,8 +34,8 @@ const Documents = () => {
               </Form.Select>
             </Form.Group>
 
-            <div className="d-flex justify-content-center">
-              <Button id="submitBtn" type="submit">
+            <div className="d-flex justify-content-center ">
+              <Button className="w-75 rounded " id="submitBtn" type="submit">
                 submit
               </Button>
             </div>

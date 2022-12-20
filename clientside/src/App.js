@@ -6,6 +6,7 @@ import Footer from "./components/layouts/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Acceuil from "./components/Acceuil";
 import Documents from "./components/Documents";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<SignIn />} />
          <Route path="/Acceuil" element={<> <Header /><Acceuil /></>} />
          <Route path="/Documents" element={<><Header/><Documents/></>} />
+         <Route path="/Contact" element={<><Header/><Contact/></>} />
         </Routes>
         <Footer />
       </div>
