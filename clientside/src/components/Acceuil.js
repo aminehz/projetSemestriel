@@ -5,7 +5,7 @@ import { BrowserRouter as Router,Link } from "react-router-dom";
 const Acceuil = () => {
   return (
     <div className="me-auto">
-      <Carousel autoPlay interval="3000" transitionTime="5000" showThumbs={false}>
+      <Carousel className="p-5" autoPlay interval="3000" transitionTime="5000" showThumbs={false}>
         <div className="imgCaroussel">
           <img src="assets/poly1.jpg" />
         
