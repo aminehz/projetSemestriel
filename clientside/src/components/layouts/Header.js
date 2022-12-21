@@ -21,15 +21,15 @@ const Header = () => {
               Contact
             </Nav.Link>
             <NavDropdown title="Documents" id="NavLink">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item href="/offredestage">
                 Offres Des Stages
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item href="/certifications">
                 Certification
               </NavDropdown.Item>
               <NavDropdown.Item href="/Documents">Document</NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link id="NavLink" href="#pricing">
+            <Nav.Link id="NavLink" href="/apropos">
               A Propos
             </Nav.Link>
            

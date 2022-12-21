@@ -24,7 +24,7 @@ const Acceuil = () => {
         </div>
       </Carousel>
       <div className="pt-5 pb-5 d-flex flex-row justify-content-center">
-        <Link to="/Apropos">
+        <Link to="/apropos">
         <Button id="AproposBtn">A propos</Button>
         </Link>
       

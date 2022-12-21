@@ -22,10 +22,6 @@ function App() {
   <div class="col align-self-center">
   <br></br>
 <br></br>
-<br></br>
-<br></br><br></br>
-<br></br>
-<br></br>
   <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px'}}>
   <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
 

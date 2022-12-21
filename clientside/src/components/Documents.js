@@ -20,12 +20,12 @@ const Documents = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Email:</Form.Label>
+              <Form.Label>Email</Form.Label>
               <Form.Control type="text" placeholder="Entrer votre Email" />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Choisir le document:</Form.Label>
+              <Form.Label>Choisir le document</Form.Label>
               <Form.Select>
                 <option>Attestation de présence</option>
                 <option>Certification d'inscription</option>
