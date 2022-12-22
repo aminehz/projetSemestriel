@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Certifications{% endblock %}
+
+{% block body %}
+    <h1>Certifications</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ certification.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre_certifications</th>
+                <td>{{ certification.titreCertifications }}</td>
+            </tr>
+            <tr>
+                <th>Description_certifications</th>
+                <td>{{ certification.descriptionCertifications }}</td>
+            </tr>
+            <tr>
+                <th>Image_certifications</th>
+                <td>{{ certification.imageCertifications }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_certifications_index') }}">back to list</a>
+
+    <a href="{{ path('app_certifications_edit', {'id': certification.id}) }}">edit</a>
+
+    {{ include('certifications/_delete_form.html.twig') }}
+{% endblock %}
