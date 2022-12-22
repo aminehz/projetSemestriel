@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import React from "react";
+import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import {
   MDBBtn,
@@ -26,7 +27,7 @@ const Certifications = () => {
 
       <div className="d-flex justify-content-center p-5 mt-5   ">
         <Row xs={1} md={4} className="g-4">
-          {Array.from({ length: 24 }).map((_, idx) => (
+          {Array.from({ length: 16 }).map((_, idx) => (
             <Col>
               <Card className="img-thumbnail shadow  ">
                 <Card.Img variant="top" src="assets/android.png" />
@@ -34,12 +35,12 @@ const Certifications = () => {
                   <Card.Title>Card title</Card.Title>
                   <Card.Text>bonjour</Card.Text>
                   <div className="d-flex justify-content-center">
-                    <MDBBtn id="inscriptionCertif"
+                    <MDBBtn
+                      id="inscriptionCertif"
                       onClick={() => setScrollableModal(!scrollableModal)}
                     >
                       S'inscrire
                     </MDBBtn>
-                   
                   </div>
                 </Card.Body>
               </Card>
@@ -54,7 +55,7 @@ const Certifications = () => {
           <MDBModalDialog scrollable>
             <MDBModalContent>
               <MDBModalHeader>
-                <MDBModalTitle>Modal title</MDBModalTitle>
+                <MDBModalTitle>Inscription au certification</MDBModalTitle>
                 <MDBBtn
                   className="btn-close"
                   color="none"
@@ -62,102 +63,42 @@ const Certifications = () => {
                 ></MDBBtn>
               </MDBModalHeader>
               <MDBModalBody>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur et. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
-                </p>
-                <p>
-                  Aenean lacinia bibendum nulla sed consectetur. Praesent
-                  commodo cursus magna, vel scelerisque nisl consectetur et.
-                  Donec sed odio dui. Donec ullamcorper nulla non metus auctor
-                  fringilla.
-                </p>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur et. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
-                </p>
-                <p>
-                  Aenean lacinia bibendum nulla sed consectetur. Praesent
-                  commodo cursus magna, vel scelerisque nisl consectetur et.
-                  Donec sed odio dui. Donec ullamcorper nulla non metus auctor
-                  fringilla.
-                </p>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur et. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
-                </p>
-                <p>
-                  Aenean lacinia bibendum nulla sed consectetur. Praesent
-                  commodo cursus magna, vel scelerisque nisl consectetur et.
-                  Donec sed odio dui. Donec ullamcorper nulla non metus auctor
-                  fringilla.
-                </p>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur et. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
-                </p>
-                <p>
-                  Aenean lacinia bibendum nulla sed consectetur. Praesent
-                  commodo cursus magna, vel scelerisque nisl consectetur et.
-                  Donec sed odio dui. Donec ullamcorper nulla non metus auctor
-                  fringilla.
-                </p>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur et. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
-                </p>
-                <p>
-                  Aenean lacinia bibendum nulla sed consectetur. Praesent
-                  commodo cursus magna, vel scelerisque nisl consectetur et.
-                  Donec sed odio dui. Donec ullamcorper nulla non metus auctor
-                  fringilla.
-                </p>
-                <p>
-                  Cras mattis consectetur purus sit amet fermentum. Cras justo
-                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-                  risus, porta ac consectetur ac, vestibulum at eros.
-                </p>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur et. Vivamus sagittis lacus vel augue laoreet
-                  rutrum faucibus dolor auctor.
-                </p>
-                <p>
-                  Aenean lacinia bibendum nulla sed consectetur. Praesent
-                  commodo cursus magna, vel scelerisque nisl consectetur et.
-                  Donec sed odio dui. Donec ullamcorper nulla non metus auctor
-                  fringilla.
-                </p>
+                <Form>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Select aria-label="Default select example">
+                      <option>Open this select menu</option>
+                      <option value="1">MICROSOFT</option>
+                      <option value="2">ANDROID</option>
+                      <option value="3">ORACLE</option>
+                      <option value="4">CISCO</option>
+                      <option value="5">JAVA</option>
+                      <option value="6">CERTIPORT</option>
+                      <option value="7">ADOBE</option>
+                      <option value="8">AUTODESK</option>
+                      <option value="9">PMI</option>
+                      <option value="10">AWS</option>
+                      <option value="11">IBM</option>
+                      <option value="12">HUAWEI</option>
+                      <option value="13">FORTINET</option>
+                      <option value="14">SOLIDWORKS</option>
+                      <option value="15">TOEIC</option>
+                      <option value="16">DELFE</option>
+                   
+                    </Form.Select>
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">
+                    S'inscrire
+                  </Button>
+                </Form>
               </MDBModalBody>
               <MDBModalFooter>
                 <MDBBtn
