@@ -1,4 +1,3 @@
-
 import './App.css';
 import SignIn from './components/SignIn';
 import Apropos from './components/Aprops';
@@ -11,6 +10,8 @@ import Contact from "./components/Contact";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
 import HeaderSign from './components/layouts/HeaderSign';
+import Certifications from './components/Certifications';
+import React from 'react';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
          <Route path="/Contact" element={<><Header/><Contact/></>} />
          <Route path="/apropos" element={<><Header/><Apropos/></>} />
          <Route path="/offredestage" element={<><Header/><OffreStage/></>} />
+         <Route path="/certifications" element={<><Header/><Certifications/></>} />
         </Routes>
         <Footer />
       </div>
