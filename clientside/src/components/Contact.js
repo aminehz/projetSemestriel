@@ -14,8 +14,8 @@ const Contact = () => {
         <CardGroup className="w-75 my-5 mt-5 pt-5">
           <Card>
             <Card.Body>
-              <Card.Title className="d-flex justify-content-center pt-5">NOUS CONTACTER :</Card.Title>
-              <div className="pt-5">
+              <Card.Title className="d-flex justify-content-center pt-1">NOUS CONTACTER </Card.Title>
+              <div className="d-flex justify-content-center pt-5">
                 <Card.Text>
                   <div>
                     <AiOutlineMail />
