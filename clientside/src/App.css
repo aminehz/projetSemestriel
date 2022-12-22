@@ -87,3 +87,19 @@ title{
   background-size: cover !important;
 }
 
+#inscriptionCertif{
+  background-color:rgb(244, 221, 171) !important;
+  color: black !important;
+  border-color: rgb(244, 221, 171) !important;
+  height: 40px;
+  width: 100px;
+
+}
+#inscriptionCertif:hover{
+  background-color: whitesmoke !important;
+  color:black !important;
+  border-color: rgb(244, 221, 171) !important;
+}
+.bgCertification{
+  background-image: url('../public/assets/bgCertification.jpg');
+}
