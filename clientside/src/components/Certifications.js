@@ -47,7 +47,7 @@ const Certifications = () => {
         <Row xs={1} md={4} className="g-4">
           {certifications.map((certification, idx) => (
             <Col>
-              <Card className="img-thumbnail shadow  ">
+              <Card className="img-thumbnail shadow  h-100 ">
                 <Card.Img variant="top" src={ certification?.imageCertifications } />
                 <Card.Body>
                   <Card.Title>{ certification?.titreCertifications }</Card.Title>

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stages index{% endblock %}
+
+{% block body %}
+    <h1>Stages index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre_stage</th>
+                <th>Description_stage</th>
+                <th>Image_stage</th>
+                <th>Nom_poste</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stage in stages %}
+            <tr>
+                <td>{{ stage.id }}</td>
+                <td>{{ stage.titreStage }}</td>
+                <td>{{ stage.descriptionStage }}</td>
+                <td>{{ stage.imageStage }}</td>
+                <td>{{ stage.nomPoste }}</td>
+                <td>
+                    <a href="{{ path('app_stages_show', {'id': stage.id}) }}">show</a>
+                    <a href="{{ path('app_stages_edit', {'id': stage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stages_new') }}">Create new</a>
+{% endblock %}
