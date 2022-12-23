@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Documents;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +17,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class DocumentsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $manager;
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Documents::class);
+        $this->manager=$manager;
+    }
+
+    public function saveDocuments($nom,$prenom,$email,$document)
+    {
+        $newDocuments=new Documents();
+        $newDocuments
+            ->setNom($nom)
+            ->setPrenom($prenom)
+            ->setEmail($email)
+            ->setTypeDocuments($document);
+            
+        $this->manager->persist($newDocuments);
+        $this->manager->flush();
     }
 
     public function add(Documents $entity, bool $flush = false): void

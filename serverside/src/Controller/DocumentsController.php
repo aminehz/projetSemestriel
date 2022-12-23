@@ -6,8 +6,10 @@ use App\Entity\Documents;
 use App\Form\DocumentsType;
 use App\Repository\DocumentsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -15,6 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DocumentsController extends AbstractController
 {
+
+    private $documentsRepository;
+    public function __construct(DocumentsRepository $documentsRepository)    
+    { 
+        $this->documentsRepository=$documentsRepository;
+        
+    }
+
     /**
      * @Route("/", name="app_documents_index", methods={"GET"})
      */
@@ -26,24 +36,24 @@ class DocumentsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_documents_new", methods={"GET", "POST"})
+     * @Route("/add", name="app_documents", methods={"POST"})
      */
-    public function new(Request $request, DocumentsRepository $documentsRepository): Response
+    public function add(Request $request, DocumentsRepository $documentsRepository): JsonResponse
     {
-        $document = new Documents();
-        $form = $this->createForm(DocumentsType::class, $document);
-        $form->handleRequest($request);
+        $data=json_decode($request->getContent(),true);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $documentsRepository->add($document, true);
+        $nom=$data['nom'];
+        $prenom=$data['prenom'];
+        $email=$data['email'];
+        $document=$data['type_documents'];
 
-            return $this->redirectToRoute('app_documents_index', [], Response::HTTP_SEE_OTHER);
+        if(empty($nom)|| empty($prenom)|| empty($email)|| empty($document))
+        {
+            throw new NotFoundHttpException('Excepting mandatory parameters !');
         }
+        $this->documentsRepository->saveDocuments($nom,$prenom,$email,$document);
+        return new JsonResponse(['status'=>'Document created !'],Response::HTTP_CREATED);
 
-        return $this->renderForm('documents/new.html.twig', [
-            'document' => $document,
-            'form' => $form,
-        ]);
     }
 
     /**
