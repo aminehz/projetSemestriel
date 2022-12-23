@@ -6,15 +6,23 @@ import GoogleMapReact from "google-map-react";
 import { AiOutlineMail, AiOutlineMobile } from "react-icons/ai";
 import { BsPinFill } from "react-icons/bs";
 import Iframe from "react-iframe";
+import { useEffect } from "react";
 const Contact = () => {
+  useEffect(() => {
+    fetch("http://localhost/projetSemestriel/serverside/public/index.php/etudiants/").then((data) =>
+      console.log(data.json().then((data2) => console.log(data2)))
+    );
+  }, []);
+
   return (
     <div>
       <div className="d-flex justify-content-center p-5" id="conctactBg">
-
         <CardGroup className="w-75 my-5 mt-5 pt-5">
           <Card>
             <Card.Body>
-              <Card.Title className="d-flex justify-content-center pt-1">NOUS CONTACTER </Card.Title>
+              <Card.Title className="d-flex justify-content-center pt-1">
+                NOUS CONTACTER{" "}
+              </Card.Title>
               <div className="d-flex justify-content-center pt-5">
                 <Card.Text>
                   <div>
@@ -43,7 +51,9 @@ const Contact = () => {
           </Card>
           <Card>
             <Card.Body>
-                <Card.Title className="d-flex justify-content-center">Formulaire de Contact</Card.Title>
+              <Card.Title className="d-flex justify-content-center">
+                Formulaire de Contact
+              </Card.Title>
               <Form>
                 <Form.Group className="mb-3">
                   <Form.Label>Nom</Form.Label>

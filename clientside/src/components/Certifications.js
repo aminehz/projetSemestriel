@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import {
@@ -18,7 +18,24 @@ import {
 
 const Certifications = () => {
   const [scrollableModal, setScrollableModal] = useState(false);
+  const [certifications, setCertifications] = useState([]);
 
+  useEffect(() => {
+    fetch("http://localhost/projetSemestriel/serverside/public/index.php/certifications/").then((data) =>
+      console.log(data.json().then((data2) => {
+        console.log(JSON.parse(data2))
+        setCertifications(JSON.parse(data2));
+      }))
+    );
+  }, []);
+
+  function subscribe()
+  {
+    let formData={idUser:title,idCertification:snippet};
+    axios.post("http://localhost/projetSemestriel/serverside/public/index.php/certifications/",formData)
+      .then(response=>console.log(response));
+  }
+  
   return (
     <div className="bgCertification">
       <div className="d-flex justify-content-center p-5 mt-5   ">
@@ -27,17 +44,17 @@ const Certifications = () => {
 
       <div className="d-flex justify-content-center p-5 mt-5   ">
         <Row xs={1} md={4} className="g-4">
-          {Array.from({ length: 16 }).map((_, idx) => (
+          {certifications.map((certification, idx) => (
             <Col>
               <Card className="img-thumbnail shadow  ">
-                <Card.Img variant="top" src="assets/android.png" />
+                <Card.Img variant="top" src={ certification?.imageCertifications } />
                 <Card.Body>
-                  <Card.Title>Card title</Card.Title>
-                  <Card.Text>bonjour</Card.Text>
+                  <Card.Title>{ certification?.titreCertifications }</Card.Title>
+                  <Card.Text>{ certification?.descriptionCertifications }</Card.Text>
                   <div className="d-flex justify-content-center">
                     <MDBBtn
                       id="inscriptionCertif"
-                      onClick={() => setScrollableModal(!scrollableModal)}
+                      onClick={() => subscribe()}
                     >
                       S'inscrire
                     </MDBBtn>

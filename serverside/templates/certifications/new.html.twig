@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Certifications{% endblock %}
+
+{% block body %}
+    <h1>Create new Certifications</h1>
+
+    {{ include('certifications/_form.html.twig') }}
+
+    <a href="{{ path('app_certifications_index') }}">back to list</a>
+{% endblock %}
