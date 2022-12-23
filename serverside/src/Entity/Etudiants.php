@@ -14,7 +14,9 @@ use Doctrine\ORM\Mapping\ManyToMany;
  * @ORM\Entity(repositoryClass=EtudiantsRepository::class)
  */
 class Etudiants
-{     
+{
+  
+
 
     /**
      * @ORM\Id
@@ -43,8 +45,9 @@ class Etudiants
      */
     private $email;
 
-    
-   /**
+   
+
+    /**
      * Many Users have Many Groups.
      * @ManyToMany(targetEntity="Certifications")
      * @JoinTable(name="Etudiants_Certifications",
@@ -53,9 +56,34 @@ class Etudiants
      *      )
      * @var Collection<int,Certifications>
      */
-     private $certifications; 
+    private $certifications;
 
     
+    public function __construct()
+    {
+      // Si vous aviez déjà un constructeur, ajoutez juste cette ligne :
+      $this->certifications = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+
+    public function addCertifications(Certifications $certifications): self
+    {
+        if (!$this->certifications->contains($certifications)) {
+            $this->certifications[] = $certifications;
+        }
+
+        return $this;
+    }
+
+    public function removeCertifications(Certifications $certifications): self
+    {
+        if ($this->certifications->contains($certifications)) {
+            $this->certifications->removeElement($certifications);
+        }
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
@@ -114,8 +142,4 @@ class Etudiants
     {
         return $this->certifications;
     }
-
-   
-
-
 }

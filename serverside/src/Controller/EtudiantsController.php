@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Etudiants;
 use App\Form\EtudiantsType;
+use App\Repository\CertificationsRepository;
 use App\Repository\EtudiantsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -94,5 +95,19 @@ class EtudiantsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_etudiants_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/subscribe/{idUser}/{idCertifications}",name="app_etudiants_subscribe",methods={"POST"})
+     */
+     public function subscribe(ManagerRegistry $doctrine,$idUser,$idCertifications,EtudiantsRepository $etudiantsRepository,CertificationsRepository $certificationsRepository )
+    {
+        $etudiant=$etudiantsRepository->find($idUser);
+        $certification=$certificationsRepository->find($idCertifications);
+        
+        $etudiant->addCertifications($certification);
+        $doctrine->getManager()->flush();
+        return new Response("ok");
+
     }
 }
