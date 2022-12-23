@@ -15,24 +15,25 @@ import {
   MDBModalBody,
   MDBModalFooter,
 } from "mdb-react-ui-kit";
+import axios from "axios";
 
 const Certifications = () => {
   const [scrollableModal, setScrollableModal] = useState(false);
   const [certifications, setCertifications] = useState([]);
+  
 
   useEffect(() => {
     fetch("http://localhost/projetSemestriel/serverside/public/index.php/certifications/").then((data) =>
       console.log(data.json().then((data2) => {
         console.log(JSON.parse(data2))
-        setCertifications(JSON.parse(data2));
+         setCertifications(JSON.parse(data2));
       }))
     );
   }, []);
 
-  function subscribe()
+  function subscribe(idCertification)
   {
-    let formData={idUser:title,idCertification:snippet};
-    axios.post("http://localhost/projetSemestriel/serverside/public/index.php/certifications/",formData)
+    axios.post(`http://localhost/projetSemestriel/serverside/public/index.php/etudiants/subscribe/1/${idCertification}`)
       .then(response=>console.log(response));
   }
   
@@ -42,7 +43,7 @@ const Certifications = () => {
         <h1>Les Certifications du PolyFc</h1>
       </div>
 
-      <div className="d-flex justify-content-center p-5 mt-5   ">
+      <div className="d-flex justify-content-center p-5 mt-5 ">
         <Row xs={1} md={4} className="g-4">
           {certifications.map((certification, idx) => (
             <Col>
@@ -54,7 +55,7 @@ const Certifications = () => {
                   <div className="d-flex justify-content-center">
                     <MDBBtn
                       id="inscriptionCertif"
-                      onClick={() => subscribe()}
+                      onClick={() => subscribe(certification?.id)}
                     >
                       S'inscrire
                     </MDBBtn>
