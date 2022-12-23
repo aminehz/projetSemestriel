@@ -12,9 +12,9 @@ const[document,setDocument]=useState('');
 
 const handleSubmit=(e)=>{
   e.preventDefault();
-  let formData={nom:nom,prenom:prenom,email:email,document:document};
+  let formData={nom:nom,prenom:prenom,email:email,type_documents:document};
   console.log(formData);
-  axios.post("",formData)
+  axios.post("http://localhost/projetSemestriel/serverside/public/index.php/documents/add",formData)
   .then(response=>console.log(response));
 }
 
@@ -44,12 +44,7 @@ const handleSubmit=(e)=>{
 
             <Form.Group className="mb-3">
               <Form.Label>Choisir le document</Form.Label>
-              <Form.Select  >
-                <option name="attestationPresence" value={document} onChange={(e)=>setDocument(e.target.value)} >Attestation de présence</option>
-                <option name="certificationInscription" value={document} onChange={(e)=>setDocument(e.target.value)}>Certification d'inscription</option>
-                <option name="releveNotes" value={document} onChange={(e)=>setDocument(e.target.value)}>Rélevé de Note</option>
-                <option name="attestationReussite" value={document} onChange={(e)=>setDocument(e.target.value)}>Attestation de Réussite</option>
-              </Form.Select>
+              <Form.Control name="document" value={document} onChange={(e)=>setDocument(e.target.value)} type="text" placeholder="Entrer nom document" />
             </Form.Group>
 
             <div className="d-flex justify-content-center ">
