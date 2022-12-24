@@ -44,7 +44,7 @@ public function __construct(ContactRepository $contactRepository)
         $email=(new Email())
         ->from(new Address($email, 'Mailtrap'))
         ->to('amine.hz.hz.98@gmail.com')
-        ->subject('hello')
+        ->subject("Contact du $nom $prenom")
         ->text($message);
         $mailer->send($email);
         
