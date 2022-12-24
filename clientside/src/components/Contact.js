@@ -6,13 +6,21 @@ import GoogleMapReact from "google-map-react";
 import { AiOutlineMail, AiOutlineMobile } from "react-icons/ai";
 import { BsPinFill } from "react-icons/bs";
 import Iframe from "react-iframe";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const Contact = () => {
-  useEffect(() => {
-    fetch("http://localhost/projetSemestriel/serverside/public/index.php/etudiants/").then((data) =>
-      console.log(data.json().then((data2) => console.log(data2)))
-    );
-  }, []);
+  const [nom,setNom]=useState('');
+  const [prenom,setPrenom]=useState('');
+  const [email,setEmail]=useState('');
+  const [message,setMessage]=useState('');
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    let formData={nom:nom,prenom:prenom,email:email,message:message};
+    console.log(formData);
+    axios.post("http://localhost/projetSemestriel/serverside/public/index.php/contact/email",formData)
+    .then(response=>console.log(response));
+  }
 
   return (
     <div>
@@ -54,21 +62,22 @@ const Contact = () => {
               <Card.Title className="d-flex justify-content-center">
                 Formulaire de Contact
               </Card.Title>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                   <Form.Label>Nom</Form.Label>
-                  <Form.Control type="text" placeholder="Entrer votre Nom" />
+                  <Form.Control name="nom" value={nom} onChange={(e)=>setNom(e.target.value)} type="text" placeholder="Entrer votre Nom" />
                   <Form.Label>Prénom</Form.Label>
-                  <Form.Control type="text" placeholder="Entrer votre Prenom" />
+                  <Form.Control name="prenom" value={prenom} onChange={(e)=>setPrenom(e.target.value)} type="text" placeholder="Entrer votre Prenom" />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" placeholder="Entrer votre email" />
+                  <Form.Control name="email" value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Entrer votre email" />
                 </Form.Group>
                 <Form.Group className="mb-3 ">
                   <Form.Label>Message:</Form.Label>
                   <Form.Control
+                  name="message" value={message} onChange={(e)=>setMessage(e.target.value)}
                     as="textarea"
                     type="text"
                     placeholder="Entrer votre message"
