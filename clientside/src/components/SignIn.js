@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MDBBtn,
   MDBContainer,
@@ -10,8 +10,39 @@ import {
   
 }
 from 'mdb-react-ui-kit';
+import axios from "axios";
+import Form from "react-bootstrap/Form";
+
 
 function App() {
+
+  const [email,setEmail]=useState("");
+  const [password,setPassword]=useState("");
+  const [user,setUser]=useState([]);
+  const [succ,setSucc]=useState(false);
+  
+  useEffect(() => {
+    fetch("http://localhost/projetSemestriel/serverside/public/index.php/user/verification").then((data) =>
+      console.log(data.json().then((data2) => {
+        console.log(JSON.parse(data2))
+         setUser(JSON.parse(data2));
+      }))
+    );
+  }, []);
+
+  const handleSubmit=async (e)=>{
+    e.preventDefault();
+    let formData={email:email,password:password};
+    console.log(formData);
+    axios.post("http://localhost/projetSemestriel/serverside/public/index.php/user/verification",formData)
+    .then(response=>console.log(response));
+   
+  }
+
+
+
+
+
   return (
     
     <MDBContainer fluid className='bg-image'>
@@ -25,14 +56,25 @@ function App() {
 
               <h2 className="fw-bold mb-2 text-center">Sign in</h2>
               <p className="text-black-50 mb-3">Please enter your login and password!</p>
-
-              <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
-              <MDBInput  wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
+                <Form  onSubmit={handleSubmit} >
+                 <MDBInput name="email" value={email} onChange={(e)=>setEmail(e.target.value)} wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
+                   <MDBInput name="password" value={password} onChange={(e)=>setPassword(e.target.value)} wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
 
               
-              <MDBBtn  classname='btn-login' size='lg'>
-                Login
-              </MDBBtn>
+                  <MDBBtn  classname='btn-login' size='lg'>
+                       Login
+                   </MDBBtn>
+                </Form>
+                <>
+                { user.map((users,idx)=>{
+      if(users.Email==email){
+        console.log("yes");
+      }
+    })
+
+                }
+                </>
+              
 
               <hr className="my-4" />
 

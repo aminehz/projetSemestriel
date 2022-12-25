@@ -39,23 +39,19 @@ public function __construct(StagesRepository $stagesRepository)
          $prenom=$data['prenom'];
          $email=$data['email'];
          $cv=$data['cv'];
-
-
+         
+        
+        
 
         $email=(new Email())
         ->from(new Address($email,'Mailtrap'))
         ->to('amine.hz.hz.98@gmail.com')
         ->subject("Demande du stage $nom $prenom")
-        ->text($cv);
+        ->attachFromPath($cv);
         $mailer->send($email);
         
         return new Response('Email was sent');
      }
-
-
-
-
-
 
 
     /**

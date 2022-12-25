@@ -175,7 +175,7 @@ function App() {
                       onChange={(e) => setCV(e.target.value)}
                       wrapperClass="mb-4"
                       id="form4"
-                      type="text"
+                      type="file"
                       placeholder="Upload"
                     />
                     <MDBBtn
