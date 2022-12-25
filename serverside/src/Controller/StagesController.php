@@ -8,6 +8,9 @@ use App\Repository\StagesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -15,7 +18,42 @@ use Symfony\Component\Serializer\SerializerInterface;
  * @Route("/stages")
  */
 class StagesController extends AbstractController
+
+{       
+    private $stagesRepository;
+public function __construct(StagesRepository $stagesRepository)
 {
+   $this->stagesRepository=$stagesRepository;
+}
+
+
+/**
+* @Route("/email")
+* @param MailerInterface $mailer
+* @return Response
+*/
+
+     public function sendEmail(MailerInterface $mailer,Request $request,StagesRepository $stagesRepository)
+     {   $data=json_decode($request->getContent(),true);
+         $nom=$data['nom'];
+         $prenom=$data['prenom'];
+         $email=$data['email'];
+         $cv=$data['cv'];
+         
+        
+        
+
+        $email=(new Email())
+        ->from(new Address($email,'Mailtrap'))
+        ->to('amine.hz.hz.98@gmail.com')
+        ->subject("Demande du stage $nom $prenom")
+        ->attachFromPath($cv);
+        $mailer->send($email);
+        
+        return new Response('Email was sent');
+     }
+
+
     /**
      * @Route("/", name="app_stages_index", methods={"GET"})
      */
@@ -88,4 +126,7 @@ class StagesController extends AbstractController
 
         return $this->redirectToRoute('app_stages_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    
 }
