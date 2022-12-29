@@ -10,7 +10,7 @@ const Header = () => {
     <div className="">
       <Navbar className="NavBg">
         <Container>
-          <Navbar.Brand id="NavLink" href="/Acceuil">
+          <Navbar.Brand id="NavLink" href="">
             POLYTEC
           </Navbar.Brand>
           <Nav className="m-auto">
@@ -32,6 +32,12 @@ const Header = () => {
             <Nav.Link id="NavLink" href="/apropos">
               A Propos
             </Nav.Link>
+            <div className="d-flex justify-content-end ml-5 btn btn-dark">
+            <Nav.Link id="Logout" href="/">
+              Logout
+            </Nav.Link>
+            </div>
+            
            
           </Nav>
         </Container>
