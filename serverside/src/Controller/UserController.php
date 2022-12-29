@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -23,21 +25,39 @@ class UserController extends AbstractController
     }
 
       /**
-     * @Route("/verification", name="app_documents", methods={"POST"})
+     * @Route("/verification", name="app_documents", methods={"GET","POST"})
      */
-    public function add(Request $request, UserRepository $userRepository,SerializerInterface $serializer): JsonResponse
+    public function verification(Request $request, UserRepository $userRepository,SerializerInterface $serializer): JsonResponse
     {
         $data=json_decode($request->getContent(),true);
+       
 
         $email=$data['email'];
         $password=$data['password'];
-        $users = $userRepository->findAll();
-        $jsonContent = $serializer->serialize($users, 'json');
-        return $this->json($jsonContent);
+        $user = $userRepository->findOneBy(['Email'=>$email]);
+        
+        if(!empty($user))
+        {
+            if($user->getPassword() == $password)
+            {
+                return $this->json(['user'=> $user,'message'=>"success"]);
+            }
+            else
+             {
+                $jsonContent = $serializer->serialize($user, 'json');
+                return $this->json(['user'=> $jsonContent,'message'=>"failed"]);
+
+            }
+        }
+        else 
+        {
+            return $this->json(['message'=>"donnees invalide."]);
+        }
 
         
 
     }
+     
 
     
 }

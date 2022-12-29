@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -84,14 +85,20 @@ class CertificationsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_certifications_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Certifications $certification, CertificationsRepository $certificationsRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$certification->getId(), $request->request->get('_token'))) {
-            $certificationsRepository->remove($certification, true);
-        }
+ * @Route("/delete/{id}", name="delete_customer", methods={"DELETE"})
+ */
+public function delete(CertificationsRepository $certificationsRepository,$id): JsonResponse
+{
+    $certification = $this->certificationsRepository->findOneBy(['id' => $id]);
 
-        return $this->redirectToRoute('app_certifications_index', [], Response::HTTP_SEE_OTHER);
-    }
+    $this->certificationsRepository->removeCustomer($certification);
+
+    return new JsonResponse(['status' => 'certification deleted'], Response::HTTP_NO_CONTENT);
+}
+
+    public function removeCustomer(Certifications $certification)
+{
+    $this->manager->remove($certification);
+    $this->manager->flush();
+}
 }
