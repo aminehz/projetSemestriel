@@ -12,6 +12,7 @@ import Footer from "./components/layouts/Footer";
 import HeaderSign from './components/layouts/HeaderSign';
 import Certifications from './components/Certifications';
 import React from 'react';
+import Admin from './components/Admin';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
          <Route path="/apropos" element={<><Header/><Apropos/></>} />
          <Route path="/offredestage" element={<><Header/><OffreStage/></>} />
          <Route path="/certifications" element={<><Header/><Certifications/></>} />
+         <Route path="/admin" element={<><Header/><Admin/></>} />
         </Routes>
         <Footer />
       </div>

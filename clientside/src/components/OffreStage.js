@@ -18,7 +18,7 @@ function App() {
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
-  const [cv, setCV] = useState("");
+  const [cv, setCV] = useState();
 
   useEffect(() => {
     fetch(
@@ -37,13 +37,20 @@ function App() {
     e.preventDefault();
     let formData = {nom:nom,prenom:prenom,email:email,cv:cv};
     console.log(formData);
+    console.log(cv);
     axios
       .post(
         "http://localhost/projetSemestriel/serverside/public/index.php/stages/email",
         formData
       )
       .then((response) => console.log(response));
+     
   };
+
+  function handleChange(event)
+  {
+    setCV(event.target.files[0])
+  }
 
   return (
     <main>
@@ -170,9 +177,7 @@ function App() {
                     />
                     <label> Votre CV</label>
                     <MDBInput
-                      name="cv"
-                      value={cv}
-                      onChange={(e) => setCV(e.target.value)}
+                      onChange={handleChange}
                       wrapperClass="mb-4"
                       id="form4"
                       type="file"

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBContainer,
@@ -18,24 +19,22 @@ function App() {
 
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
-  const [user,setUser]=useState([]);
-  const [succ,setSucc]=useState(false);
+  const [user,setUser]=useState();
+ 
   
   useEffect(() => {
-    fetch("http://localhost/projetSemestriel/serverside/public/index.php/user/verification").then((data) =>
-      console.log(data.json().then((data2) => {
-        console.log(JSON.parse(data2))
-         setUser(JSON.parse(data2));
-      }))
-    );
+    
   }, []);
 
   const handleSubmit=async (e)=>{
     e.preventDefault();
     let formData={email:email,password:password};
-    console.log(formData);
     axios.post("http://localhost/projetSemestriel/serverside/public/index.php/user/verification",formData)
-    .then(response=>console.log(response));
+    .then(response=>
+        {
+          console.log(response.data.user);
+          setUser(response.data?.user);
+      });
    
   }
 
@@ -56,6 +55,9 @@ function App() {
 
               <h2 className="fw-bold mb-2 text-center">Sign in</h2>
               <p className="text-black-50 mb-3">Please enter your login and password!</p>
+              {user ? user?.Email == "admin@admin" ? <Navigate to="/admin" replace={true} /> :
+               <Navigate to="/Acceuil" replace={true} /> : null
+              }
                 <Form  onSubmit={handleSubmit} >
                  <MDBInput name="email" value={email} onChange={(e)=>setEmail(e.target.value)} wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
                    <MDBInput name="password" value={password} onChange={(e)=>setPassword(e.target.value)} wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
@@ -65,15 +67,7 @@ function App() {
                        Login
                    </MDBBtn>
                 </Form>
-                <>
-                { user.map((users,idx)=>{
-      if(users.Email==email){
-        console.log("yes");
-      }
-    })
-
-                }
-                </>
+     
               
 
               <hr className="my-4" />

@@ -34,9 +34,8 @@ class DocumentsController extends AbstractController
             'documents' => $documentsRepository->findAll(),
         ]);
     }
-
     /**
-     * @Route("/add", name="app_documents", methods={"POST"})
+     * @Route("/add", name="app_documents_add", methods={"POST"})
      */
     public function add(Request $request, DocumentsRepository $documentsRepository): JsonResponse
     {
@@ -55,6 +54,7 @@ class DocumentsController extends AbstractController
         return new JsonResponse(['status'=>'Document created !'],Response::HTTP_CREATED);
 
     }
+    
 
     /**
      * @Route("/{id}", name="app_documents_show", methods={"GET"})
@@ -86,15 +86,6 @@ class DocumentsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_documents_delete", methods={"POST"})
-     */
-    public function delete(Request $request, Documents $document, DocumentsRepository $documentsRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$document->getId(), $request->request->get('_token'))) {
-            $documentsRepository->remove($document, true);
-        }
-
-        return $this->redirectToRoute('app_documents_index', [], Response::HTTP_SEE_OTHER);
-    }
+    
+  
 }
