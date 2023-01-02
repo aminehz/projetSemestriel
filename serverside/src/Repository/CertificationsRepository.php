@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Certifications;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -15,10 +16,12 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Certifications[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CertificationsRepository extends ServiceEntityRepository
-{
-    public function __construct(ManagerRegistry $registry)
+
+{private $manager;
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, Certifications::class);
+        $this->manager=$manager;
     }
 
     public function add(Certifications $entity, bool $flush = false): void
@@ -37,6 +40,19 @@ class CertificationsRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function addCertif($titreCertifications,$descriptionCertifications,$imageCertifications)
+    {
+        $newCertif=new Certifications();
+        $newCertif
+            ->setTitreCertifications($titreCertifications)
+            ->setDescriptionCertifications($descriptionCertifications)
+            ->setImageCertifications($imageCertifications);
+
+            
+        $this->manager->persist($newCertif);
+        $this->manager->flush();
     }
 
 //    /**
