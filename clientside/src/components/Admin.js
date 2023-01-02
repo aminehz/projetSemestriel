@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
 
 const Admin = () => {
   const [certifications, setCertifications] = useState([]);
@@ -9,7 +12,16 @@ const Admin = () => {
   const[titreCertifications,setTitreCertifications]=useState('');
   const [descriptionCertifications,setDescriptionCertifications]=useState('');
   const [imageCertifications,setImageCertifications]=useState('');
+  const [Email,setEmail]=useState('');
+  const [password,setPassword]=useState('');
 
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    let formData={Email:Email,password:password};
+    console.log(formData);
+    axios.post("http://localhost/projetSemestriel/serverside/public/index.php/user/addUser",formData)
+    .then(response=>console.log(response));
+  }
 
   useEffect(() => {
     fetch(
@@ -244,7 +256,35 @@ const Admin = () => {
           ))}
         </tbody>
       </table>
+      Add a New User:
+      <div className="d-flex justify-content-center p-5 bg-image" id="bgimgdoc">
+      <Card className="p-1 w-50">
+        <Card.Body>
+          <Form  onSubmit={handleSubmit}>
+            
+
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
+              <Form.Control name="Email" value={Email} onChange={(e)=>setEmail(e.target.value)} type="text" placeholder="Entrer votre Email" />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>password</Form.Label>
+              <Form.Control name="password" value={password} onChange={(e)=>setPassword(e.target.value)} type="text" placeholder="Entrer password" />
+            </Form.Group>
+
+            <div className="d-flex justify-content-center ">
+              <Button className="w-75 rounded " id="submitBtn" type="submit">
+                submit
+              </Button>
+            </div>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
+    </div>
+
+    
   );
 };
 export default Admin;
