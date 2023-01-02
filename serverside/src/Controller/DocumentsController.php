@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * @Route("/documents")
@@ -28,12 +29,13 @@ class DocumentsController extends AbstractController
     /**
      * @Route("/", name="app_documents_index", methods={"GET"})
      */
-    public function index(DocumentsRepository $documentsRepository): Response
+    public function index(DocumentsRepository $documentsRepository,SerializerInterface $serializer): Response
     {
-        return $this->render('documents/index.html.twig', [
-            'documents' => $documentsRepository->findAll(),
-        ]);
+        $documents=$documentsRepository->findAll();
+        $jsonContent = $serializer->serialize($documents, 'json');
+        return $this->json($jsonContent);
     }
+
     /**
      * @Route("/add", name="app_documents_add", methods={"POST"})
      */

@@ -18,7 +18,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  * @Route("/certifications")
  */
 class CertificationsController extends AbstractController
-{
+{  private $certificationsRepository;
+
     /**
      * @Route("/", name="app_certifications_index", methods={"GET"})
      */
@@ -84,21 +85,27 @@ class CertificationsController extends AbstractController
         ]);
     }
 
-    /**
- * @Route("/delete/{id}", name="delete_customer", methods={"DELETE"})
- */
-public function delete(CertificationsRepository $certificationsRepository,$id): JsonResponse
-{
-    $certification = $this->certificationsRepository->findOneBy(['id' => $id]);
 
-    $this->certificationsRepository->removeCustomer($certification);
 
-    return new JsonResponse(['status' => 'certification deleted'], Response::HTTP_NO_CONTENT);
-}
 
-    public function removeCustomer(Certifications $certification)
-{
-    $this->manager->remove($certification);
-    $this->manager->flush();
-}
+     /**
+     * @Route("/addCertif",name="app_certifications_addCertif",methods={"POST","GET"})
+     */
+    public function addCertif(Request $request,CertificationsRepository $certificationsRepository): JsonResponse
+    {
+        $data=json_decode($request->getContent(),true);
+        
+        $titreCertifications=$data['titreCertifications'];
+        $descriptionCertifications=$data['descriptionCertifications'];
+        $imageCertifications=$data['imageCertifications'];
+
+        if(empty($titreCertifications)|| empty($descriptionCertifications) || ($imageCertifications))
+        {
+            throw new NotFoundHttpException('Excepting mandatory parameters !');
+        }
+        $this->certificationsRepository->saveCertif($titreCertifications,$descriptionCertifications,$imageCertifications);
+        return new JsonResponse(['status'=>'certifications created !'],Response::HTTP_CREATED);
+
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -15,10 +16,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserRepository extends ServiceEntityRepository
-{
-    public function __construct(ManagerRegistry $registry)
+{   private $manager;
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager)
     {
         parent::__construct($registry, User::class);
+        $this->manager=$manager;
     }
 
     public function add(User $entity, bool $flush = false): void
@@ -37,6 +39,17 @@ class UserRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function saveUser($Email,$password)
+    {
+        $newUser=new User();
+        $newUser
+            ->setEmail($Email)
+            ->setPassword($password);
+            
+        $this->manager->persist($newUser);
+        $this->manager->flush();
     }
 
 //    /**
