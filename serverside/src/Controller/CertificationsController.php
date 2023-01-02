@@ -85,7 +85,7 @@ class CertificationsController extends AbstractController
     }
 
     /**
- * @Route("/delete/{id}", name="delete_customer", methods={"DELETE"})
+ * @Route("/delete/{id}", name="app_certifications_delete", methods={"DELETE"})
  */
 public function delete(CertificationsRepository $certificationsRepository,$id): JsonResponse
 {

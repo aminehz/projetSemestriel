@@ -24,6 +24,16 @@ class UserController extends AbstractController
         
     }
 
+     /**
+     * @Route("/", name="app_user_index", methods={"GET"})
+     */
+    public function index(UserRepository $usersRepository,SerializerInterface $serializer): Response
+    {
+        $users=$usersRepository->findAll();
+        $jsonContent = $serializer->serialize($users, 'json');
+        return $this->json($jsonContent);
+    }
+
       /**
      * @Route("/verification", name="app_documents", methods={"GET","POST"})
      */

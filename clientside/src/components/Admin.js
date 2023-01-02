@@ -5,6 +5,7 @@ const Admin = () => {
   const [certifications, setCertifications] = useState([]);
   const [stages, setStages] = useState([]);
   const [user, setUser] = useState([]);
+  const[documents,setDocuments]=useState([]);
   const[titreCertifications,setTitreCertifications]=useState('');
   const [descriptionCertifications,setDescriptionCertifications]=useState('');
   const [imageCertifications,setImageCertifications]=useState('');
@@ -35,7 +36,7 @@ const Admin = () => {
       )
     );
   }, []);
-  useEffect(() => {
+ /* useEffect(() => {
     fetch(
       "http://localhost/projetSemestriel/serverside/public/index.php/user/verification"
     ).then((data) =>
@@ -46,7 +47,36 @@ const Admin = () => {
         })
       )
     );
+  }, []);*/
+  //fetch data for documents
+  useEffect(() => {
+    fetch(
+      "http://localhost/projetSemestriel/serverside/public/index.php/documents/"
+    ).then((data) =>
+      console.log(
+        data.json().then((data2) => {
+          console.log(JSON.parse(data2));
+          setDocuments(JSON.parse(data2));
+        })
+      )
+    );
   }, []);
+
+  //fetch data for users
+
+  useEffect(() => {
+    fetch(
+      "http://localhost/projetSemestriel/serverside/public/index.php/user/"
+    ).then((data) =>
+      console.log(
+        data.json().then((data2) => {
+          console.log(JSON.parse(data2));
+          setUser(JSON.parse(data2));
+        })
+      )
+    );
+  }, []);
+
 
   //delete fetch
   const handleDelete=(id)=>{
@@ -140,11 +170,50 @@ const Admin = () => {
           ))}
         </tbody>
       </table>
-      Users:
+      Les Demandes des documents: 
       <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
           <tr>
             <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Type documents</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {documents.map((document, idx) => (
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="ms-3">
+                    <p class="fw-bold mb-1">{document?.nom}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="fw-normal mb-1">{document?.prenom}</p>
+              </td>
+
+              <td>{document?.email}</td>
+              
+                <td>{document?.typeDocuments}</td>
+                
+                <td>
+                <button type="button" class="btn btn-link btn-sm btn-rounded ">
+                  Edit
+                </button>
+                </td>
+              
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      Users:
+      <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Email</th>
             <th>Mot de passe</th>
             
 
